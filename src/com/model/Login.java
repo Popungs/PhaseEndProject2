@@ -2,31 +2,35 @@ package com.model;
 
 public class Login {
 	private String uname;
-	private String email;
+	private String password;
+	
+	public Login(String uname, String password) {
+		super();
+		this.uname = uname;
+		this.password = password;
+	}
+	
 	public Login() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Login(String uname, String email) {
-		super();
-		this.uname = uname;
-		this.email = email;
-	}
+
 	public String getUname() {
 		return uname;
 	}
 	public void setUname(String uname) {
 		this.uname = uname;
 	}
-	public String getEmail() {
-		return email;
+	public String getPassword() {
+		return password;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPassword(String password) {
+		this.password = password;
 	}
+
 	@Override
 	public String toString() {
-		return "Login [uname=" + uname + ", email=" + email + "]";
+		return "Login [uname=" + uname + ", password=" + password + "]";
 	}
-	
+
 }

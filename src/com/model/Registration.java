@@ -9,11 +9,14 @@ public class Registration {
 	@Id
 	private String uname;
 	private String email;
+	private String password;
 	private String city;
-	public Registration(String uname, String email, String city) {
+
+	public Registration(String uname, String email, String password, String city) {
 		super();
 		this.uname = uname;
 		this.email = email;
+		this.password = password;
 		this.city = city;
 	}
 	public Registration() {
@@ -38,9 +41,16 @@ public class Registration {
 	public void setCity(String city) {
 		this.city = city;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	@Override
 	public String toString() {
-		return "Registration [uname=" + uname + ", email=" + email + ", city=" + city + "]";
+		return "Registration [uname=" + uname + ", email=" + email + ", password=" + password + ", city=" + city + "]";
 	}
+
 	
 }

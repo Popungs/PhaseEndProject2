@@ -1,4 +1,4 @@
-package com.utility;
+package com.dal;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

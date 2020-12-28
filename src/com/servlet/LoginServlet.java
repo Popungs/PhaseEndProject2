@@ -26,10 +26,11 @@ public class LoginServlet extends HttpServlet {
 		
 		UserService userService = new UserService();
 		
-		Login log = new Login(request.getParameter("uname"), request.getParameter("email"));
+		Login log = new Login(request.getParameter("uname"), 
+				request.getParameter("pass"));
 		
 
-		boolean res = userService.login(log,request,response);
+		boolean res = userService.login(log);
 
 		if (res) {
 			HttpSession session = request.getSession();

@@ -11,10 +11,10 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.dal.HibernateUtility;
 import com.dao.UserDao;
 import com.model.Login;
 import com.model.Registration;
-import com.utility.HibernateUtility;
 
 public class UserService implements UserDao {
 
@@ -26,6 +26,7 @@ public class UserService implements UserDao {
 		// validation 
 		String uname = reg.getUname();
 		String email = reg.getEmail();
+		String password = reg.getPassword();
 		String city = reg.getCity(); // unpack reg object
 		
 		Session session = HibernateUtility.getSession();
@@ -33,8 +34,8 @@ public class UserService implements UserDao {
 		List<Registration> rl = query.list();
 		// iterate over list of registered users
 		for (Registration r : rl) {
-			if (r.getUname().equals(uname) && r.getEmail().equals(email)) {
-				System.out.println("same name already exists on database!");
+			if (r.getUname().equalsIgnoreCase(uname) || r.getEmail().equals(email)) {
+				System.out.println("same name / email already exists on database!");
 				return false;
 				// do not register the same name twice
 			}
@@ -56,22 +57,23 @@ public class UserService implements UserDao {
 	}
 
 	@Override
-	public boolean login(Login log, HttpServletRequest request, HttpServletResponse response) {
+	public boolean login(Login log) {
 		
 		System.out.println("inside login service");
 		String uname = log.getUname();
-		String email = log.getEmail();
+		String password = log.getPassword();
 		Session session = HibernateUtility.getSession();
-		Query query = session.createQuery("from Registration where uname=:uname");
-		query.setString("uname", uname);
+		Query query = session.createQuery("from Registration");
+		
 		List<Registration> rl = query.list(); // should really be 1 in the list
 		for (Registration r : rl) {
-			System.out.println(r);
-			if (r.getEmail().equals(email) && r.getUname().equals(uname)) {
-				System.out.println("user found!");
+			if (r.getUname().equalsIgnoreCase(uname) && r.getPassword().equals(password)) {
+				// user valid!
+				System.out.println("user valid! loggin in");
 				return true;
 			}
 		}
+		
 			
 		
 		return false;

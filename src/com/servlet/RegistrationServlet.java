@@ -25,11 +25,10 @@ public class RegistrationServlet extends HttpServlet {
 		System.out.println("inside servlet");
 		
 		Registration reg = new Registration(request.getParameter("uname"),
-				request.getParameter("email"),request.getParameter("city"));
-		
-		Cookie cookie = new Cookie("user","admin");
-		response.addCookie(cookie);
-		
+				request.getParameter("email"),
+				request.getParameter("pass"),
+				request.getParameter("city"));
+	
 		boolean res = userService.registration(reg);
 		
 		if (res) {
